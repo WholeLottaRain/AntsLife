@@ -1,5 +1,6 @@
 import pygame
 from Generation import *
+from EntityPlacer import *
 
 WIDTH = 500
 HEIGHT = 500
@@ -16,6 +17,7 @@ world = map_init(SEED, WIDTH, HEIGHT, SCALE)
 map_sprites = pygame.sprite.Group()
 map_sprites.add(world.TileArray)
 regenerate(world,1)
+create_anthill(world)
 run = True
 while run:
     g_clock.tick(FPS)
