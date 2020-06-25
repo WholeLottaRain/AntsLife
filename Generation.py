@@ -1,3 +1,5 @@
+import random
+from opensimplex import OpenSimplex
 from Map import Map
 from Map import Tile
 
@@ -18,3 +20,20 @@ def map_init(seed, width, height, size):
     return new_map
 
 
+def regenerate(ex_map, gen_type):
+    if gen_type == 1:
+        simplex = OpenSimplex(ex_map.seed)
+        for x in range(int(ex_map.width / ex_map.size)):
+            for y in range(int(ex_map.height / ex_map.size)):
+                if simplex.noise2d(x, y) <= 0.5:
+                    ex_map.TileArray[x][y].image.fill(GREEN)
+                if simplex.noise2d(x, y) > 0.5:
+                    ex_map.TileArray[x][y].image.fill(BLUE)
+    if gen_type == 2:
+        random.seed(ex_map.seed)
+        for x in range(int(ex_map.width / ex_map.size)):
+            for y in range(int(ex_map.height / ex_map.size)):
+                if random.random() <= 0.5:
+                    ex_map.TileArray[x][y].image.fill(GREEN)
+                if random.random() > 0.5:
+                    ex_map.TileArray[x][y].image.fill(BLUE)
