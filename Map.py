@@ -2,10 +2,10 @@ import pygame
 
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, size):
+    def __init__(self, scale):
         pygame.sprite.Sprite.__init__(self)
-        self.size = size
-        self.image = pygame.Surface((self.size, self.size))
+        self.scale = scale
+        self.image = pygame.Surface((self.scale, self.scale))
         self.image.fill((0, 255, 0))
         self.rect = self.image.get_rect()
         self.default = "grass"
@@ -13,9 +13,9 @@ class Tile(pygame.sprite.Sprite):
 
 
 class Map(object):
-    def __init__(self, seed, width, height, size):
+    def __init__(self, seed, width, height, scale):
         self.width = width
         self.height = height
-        self.size = size
+        self.scale = scale
         self.seed = seed
         self.TileArray = []
