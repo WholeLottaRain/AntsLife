@@ -8,6 +8,8 @@ class Tile(pygame.sprite.Sprite):
         self.image = pygame.Surface((self.size, self.size))
         self.image.fill((0, 255, 0))
         self.rect = self.image.get_rect()
+        self.default = "grass"
+        self.state = self.default
 
 
 class Map(object):
