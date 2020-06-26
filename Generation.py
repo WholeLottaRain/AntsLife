@@ -39,5 +39,9 @@ def regenerate(ex_map, gen_type):
             for y in range(int(ex_map.height / ex_map.scale)):
                 if random.random() <= 0.5:
                     ex_map.TileArray[x][y].image.fill(GREEN)
+                    ex_map.TileArray[x][y].default = "grass"
+                    ex_map.TileArray[x][y].state = "grass"
                 if random.random() > 0.5:
                     ex_map.TileArray[x][y].image.fill(BLUE)
+                    ex_map.TileArray[x][y].default = "water"
+                    ex_map.TileArray[x][y].state = "water"

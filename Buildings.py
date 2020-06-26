@@ -1,7 +1,7 @@
 import pygame
 
 
-class Bulding(pygame.sprite.Sprite):
+class Building(pygame.sprite.Sprite):
     def __init__(self, scale):
         pygame.sprite.Sprite.__init__(self)
         self.scale = scale
@@ -10,9 +10,9 @@ class Bulding(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
-class Anthill(Bulding):
+class Anthill(Building):
     def __init__(self, scale):
         super().__init__(scale)
-        self.color=(150, 75, 0)
-        self.name="anthill"
+        self.color = (150, 75, 0)
+        self.name = "anthill"
         self.size = 5
