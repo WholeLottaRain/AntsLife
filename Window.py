@@ -14,10 +14,10 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("AntLife")
 g_clock = pygame.time.Clock()
 world = map_init(SEED, WIDTH, HEIGHT, SCALE)
-map_sprites = pygame.sprite.Group()
-map_sprites.add(world.TileArray)
 regenerate(world)
 create_anthill(world)
+map_sprites = pygame.sprite.Group()
+map_sprites.add(world.TileArray)
 run = True
 while run:
     g_clock.tick(FPS)
@@ -27,8 +27,8 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             position = pygame.mouse.get_pos()
             if event.button == 1:
-                print("Default cell state: " + world.TileArray[int(position[0] / SCALE)][int(position[1] / SCALE)].default)
-                print("Real cell state: " + world.TileArray[int(position[0] / SCALE)][int(position[1] / SCALE)].state)
+                print("Id: " + str(world.TileArray[int(position[0] / SCALE)][int(position[1] / SCALE)].id))
+                print("Cell: " + world.TileArray[int(position[0] / SCALE)][int(position[1] / SCALE)].name)
                 print("Coords: " + str(int(position[0] / SCALE)), str(int(position[1] / SCALE)))
 
     map_sprites.update()
