@@ -13,11 +13,15 @@ class Ant(pygame.sprite.Sprite):
         self.name = "ant"
         self.id = 30
         self.vision = 20
+        self.target = False
 
-    def update(self):
-        pass
+    def update(self, ex_map):
+        if self.target is False:
+            self.watch(ex_map)
+        else:
+            print("Found berry")
 
-    def watch(self):
+    def watch(self, ex_map):
         side_ax = int(self.rect.x / self.scale - self.vision)
         side_bx = int(self.rect.x / self.scale + self.vision)
         side_ay = int(self.rect.y / self.scale - self.vision)
@@ -25,4 +29,7 @@ class Ant(pygame.sprite.Sprite):
 
         for x in range(side_ax, side_bx):
             for y in range(side_ay, side_by):
-                pass
+                if ex_map.TileArray[x][y].id == 3:
+                    self.target = True
+
+
