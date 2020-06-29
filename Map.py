@@ -16,7 +16,7 @@ class Grass(pygame.sprite.Sprite):
         self.scale = scale
         self.image = pygame.Surface((self.scale, self.scale))
         self.rect = self.image.get_rect()
-        self.color = (0, 255, 0)
+        self.color = (178, 236, 93)
         self.image.fill(self.color)
         self.name = "grass"
         self.id = 1
@@ -28,7 +28,19 @@ class Water(pygame.sprite.Sprite):
         self.scale = scale
         self.image = pygame.Surface((self.scale, self.scale))
         self.rect = self.image.get_rect()
-        self.color = (0, 0, 255)
+        self.color = (60, 102, 222)
         self.image.fill(self.color)
         self.name = "water"
         self.id = 2
+
+
+class Berry(pygame.sprite.Sprite):
+    def __init__(self, scale):
+        pygame.sprite.Sprite.__init__(self)
+        self.scale = scale
+        self.image = pygame.Surface((self.scale, self.scale))
+        self.rect = self.image.get_rect()
+        self.color = (255, 30, 66)
+        self.image.fill(self.color)
+        self.name = "berry"
+        self.id = 3

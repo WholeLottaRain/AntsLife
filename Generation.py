@@ -22,7 +22,12 @@ def regenerate(ex_map):
     simplex = OpenSimplex(ex_map.seed)
     for x in range(int(ex_map.width / ex_map.scale)):
         for y in range(int(ex_map.height / ex_map.scale)):
-            if simplex.noise2d(x, y) > 0.5:
+            if 0.85 > simplex.noise2d(x, y) > 0.7:
                 ex_map.TileArray[x][y].kill()
                 ex_map.TileArray[x][y] = Water(ex_map.scale)
                 ex_map.TileArray[x][y].rect.center = x * ex_map.scale, y * ex_map.scale
+            if simplex.noise2d(x, y) > 0.85:
+                ex_map.TileArray[x][y].kill()
+                ex_map.TileArray[x][y] = Berry(ex_map.scale)
+                ex_map.TileArray[x][y].rect.center = x * ex_map.scale, y * ex_map.scale
+
