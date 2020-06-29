@@ -16,7 +16,7 @@ g_clock = pygame.time.Clock()
 world = map_init(SEED, WIDTH, HEIGHT, SCALE)
 map_sprites = pygame.sprite.Group()
 map_sprites.add(world.TileArray)
-regenerate(world,1)
+regenerate(world)
 create_anthill(world)
 run = True
 while run:
