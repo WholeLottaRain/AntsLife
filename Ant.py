@@ -33,3 +33,6 @@ class Ant(pygame.sprite.Sprite):
                 if ex_map.TileArray[x][y].id == 3:
                     self.target = True
                     self.target_position = x, y
+
+    def move_to_cell(self, x, y):
+        self.rect.center = (x * self.scale, y * self.scale)
