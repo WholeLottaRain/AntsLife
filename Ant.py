@@ -9,7 +9,7 @@ class Ant(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.color = (0, 0, 0)
         self.image.fill(self.color)
-        self.rect.center = 250, 250
+        self.rect.center = 470, 20
         self.name = "ant"
         self.id = 30
         self.vision = 20
@@ -43,10 +43,20 @@ class Ant(pygame.sprite.Sprite):
                 if ex_map.TileArray[x][y].id == 3:
                     self.target = True
                     self.target_position = x, y
+                    self.find_path(ex_map)
 
     def move_to_cell(self, x, y):
         self.rect.center = (x * self.scale, y * self.scale)
 
     def get_cell(self):
         return int(self.rect.x / self.scale), int(self.rect.y / self.scale)
+
+    def find_path(self, ex_map):
+        matrix = []
+        for x in range(0, self.vision_matrix[1]-self.vision_matrix[0]):
+            matrix.append([])
+            for y in range(0, self.vision_matrix[3]-self.vision_matrix[2]):
+                matrix[x].append(0)
+                if ex_map.TileArray[self.vision_matrix[0] + x][self.vision_matrix[2] + y].id == 2:
+                    matrix[x][y] = -1
 
