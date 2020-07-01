@@ -3,16 +3,16 @@ def find_path(ex_map, vision_matrix, in_coords, out_coords):
     finish = (out_coords[0] - vision_matrix[0], out_coords[1] - vision_matrix[1])
     matrix = path_matrix(ex_map, vision_matrix)
     wave(matrix, start, finish)
-    path = reverse(matrix, finish)
+    path = back(matrix, finish)
     path.reverse()
     return path
 
 
 def path_matrix(ex_map, vision_matrix):
     matrix = []
-    for x in range(0, vision_matrix[2] - vision_matrix[0] + 1):
+    for x in range(vision_matrix[2] - vision_matrix[0] + 1):
         matrix.append([])
-        for y in range(0, vision_matrix[3] - vision_matrix[1] + 1):
+        for y in range(vision_matrix[3] - vision_matrix[1] + 1):
             matrix[x].append(-1)
             if ex_map.TileArray[vision_matrix[0] + x][vision_matrix[1] + y].id == 2:
                 matrix[x][y] = 99
@@ -42,7 +42,7 @@ def wave(matrix, start, finish):
     return matrix
 
 
-def reverse(matrix, finish):
+def back(matrix, finish):
     path = [finish]
     counter = matrix[finish[0]][finish[1]]
     p_x, p_y = finish
@@ -56,7 +56,7 @@ def reverse(matrix, finish):
                         p_x += 1
                         finish_search = True
                         break
-                if p_x - 1 > 0:
+                if p_x - 1 >= 0:
                     if matrix[p_x - 1][p_y] == counter - 1:
                         path.append((p_x - 1, p_y))
                         p_x -= 1
@@ -68,7 +68,7 @@ def reverse(matrix, finish):
                         p_y += 1
                         finish_search = True
                         break
-                if p_y - 1 > 0:
+                if p_y - 1 >= 0:
                     if matrix[p_x][p_y - 1] == counter - 1:
                         path.append((p_x, p_y - 1))
                         p_y -= 1
