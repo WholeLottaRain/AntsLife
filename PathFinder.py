@@ -18,7 +18,7 @@ def path_matrix(ex_map, vision_matrix):
         for y in range(vision_matrix[3] - vision_matrix[1] + 1):
             matrix[x].append(-1)
             if ex_map.TileArray[vision_matrix[0] + x][vision_matrix[1] + y].id == 2:
-                matrix[x][y] = 99
+                matrix[x][y] = 999
     return matrix
 
 

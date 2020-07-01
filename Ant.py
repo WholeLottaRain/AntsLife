@@ -23,10 +23,8 @@ class Ant(pygame.sprite.Sprite):
     def update(self, ex_map):
         if self.target is False:
             self.watch(ex_map)
-        else:
-            if self.path_index < len(self.path):
-                self.move_to_cell(self.path[self.path_index][0], self.path[self.path_index][1])
-                self.path_index += 1
+        elif self.target is True:
+            self.move_to_target(ex_map)
 
     def watch(self, ex_map):
         side_ax = int(self.rect.center[0] / self.scale - self.vision)
@@ -45,14 +43,26 @@ class Ant(pygame.sprite.Sprite):
 
         for x in range(side_ax, side_bx + 1):
             for y in range(side_ay, side_by + 1):
-                if ex_map.TileArray[x][y].id == 3:
+                if ex_map.TileArray[x][y].id == 3 and ex_map.TileArray[x][y].eaten is False:
                     self.target = True
                     self.target_position = x, y
                     found_path = find_path(ex_map, self.vision_matrix, self.get_cell(), self.target_position)
                     if (len(self.path) != 0 and len(found_path) < len(self.path)) or len(self.path) == 0:
                         self.path = found_path
-                        print("Going to: " + str(self.path[len(self.path) - 1][0]) + " " + str(
-                            self.path[len(self.path) - 1][1]))
+        if self.target is True:
+            self.target_position = self.path[len(self.path) - 1][0], self.path[len(self.path) - 1][1]
+            print("Going to: " + str(self.path[len(self.path) - 1][0]) + " " + str(
+                self.path[len(self.path) - 1][1]))
+
+    def move_to_target(self, ex_map):
+        if self.path_index < len(self.path):
+            self.move_to_cell(self.path[self.path_index][0], self.path[self.path_index][1])
+            self.path_index += 1
+        if self.get_cell() == self.target_position:
+            self.path_index = 0
+            self.target = False
+            self.path = []
+            ex_map.TileArray[self.target_position[0]][self.target_position[1]].touched()
 
     def move_to_cell(self, x, y):
         self.rect.center = (x * self.scale, y * self.scale)
