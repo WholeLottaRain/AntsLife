@@ -45,6 +45,7 @@ class Berry(pygame.sprite.Sprite):
         self.name = "berry"
         self.id = 3
         self.eaten = False
+        self.booked = False
 
     def touched(self):
         self.image.fill((0, 255, 0))

@@ -43,7 +43,8 @@ class Ant(pygame.sprite.Sprite):
 
         for x in range(side_ax, side_bx + 1):
             for y in range(side_ay, side_by + 1):
-                if ex_map.TileArray[x][y].id == 3 and ex_map.TileArray[x][y].eaten is False:
+                if ex_map.TileArray[x][y].id == 3 and ex_map.TileArray[x][y].eaten is False \
+                        and ex_map.TileArray[x][y].booked is False:
                     self.target = True
                     self.target_position = x, y
                     found_path = find_path(ex_map, self.vision_matrix, self.get_cell(), self.target_position)
@@ -51,6 +52,7 @@ class Ant(pygame.sprite.Sprite):
                         self.path = found_path
         if self.target is True:
             self.target_position = self.path[len(self.path) - 1][0], self.path[len(self.path) - 1][1]
+            ex_map.TileArray[self.target_position[0]][self.target_position[1]].booked = True
             print("Going to: " + str(self.path[len(self.path) - 1][0]) + " " + str(
                 self.path[len(self.path) - 1][1]))
 
