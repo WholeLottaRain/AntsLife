@@ -1,10 +1,13 @@
 def find_path(ex_map, vision_matrix, in_coords, out_coords):
-    start = (in_coords[0] - vision_matrix[0], in_coords[1] - vision_matrix[1])
-    finish = (out_coords[0] - vision_matrix[0], out_coords[1] - vision_matrix[1])
+    start = [in_coords[0] - vision_matrix[0], in_coords[1] - vision_matrix[1]]
+    finish = [out_coords[0] - vision_matrix[0], out_coords[1] - vision_matrix[1]]
     matrix = path_matrix(ex_map, vision_matrix)
     wave(matrix, start, finish)
     path = back(matrix, finish)
     path.reverse()
+    for x in path:
+        x[0] += vision_matrix[0]
+        x[1] += vision_matrix[1]
     return path
 
 
@@ -52,25 +55,25 @@ def back(matrix, finish):
             for y in range(len(matrix[x])):
                 if p_x + 1 < len(matrix):
                     if matrix[p_x + 1][p_y] == counter - 1:
-                        path.append((p_x + 1, p_y))
+                        path.append([p_x + 1, p_y])
                         p_x += 1
                         finish_search = True
                         break
                 if p_x - 1 >= 0:
                     if matrix[p_x - 1][p_y] == counter - 1:
-                        path.append((p_x - 1, p_y))
+                        path.append([p_x - 1, p_y])
                         p_x -= 1
                         finish_search = True
                         break
                 if p_y + 1 < len(matrix[x]):
                     if matrix[p_x][p_y + 1] == counter - 1:
-                        path.append((p_x, p_y + 1))
+                        path.append([p_x, p_y + 1])
                         p_y += 1
                         finish_search = True
                         break
                 if p_y - 1 >= 0:
                     if matrix[p_x][p_y - 1] == counter - 1:
-                        path.append((p_x, p_y - 1))
+                        path.append([p_x, p_y - 1])
                         p_y -= 1
                         finish_search = True
                         break
